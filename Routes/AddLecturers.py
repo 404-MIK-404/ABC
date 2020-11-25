@@ -14,4 +14,6 @@ def AddLecturers():
         db_manager = DatabaseManager(db)
         db_manager.add_lecturer(first_name=request.form.get('first_name'), last_name=request.form.get('last_name'),
                                 patronymic=request.form.get('patronymic'))
-    return render_template('Index.html', lecturers=Lecturer.query.all(), intervals=Interval.query.all())
+    return render_template('Index.html',
+                           lecturers=Lecturer.query.all(),
+                           intervals=Interval.query.all())

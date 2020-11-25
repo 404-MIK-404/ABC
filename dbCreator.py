@@ -15,10 +15,22 @@ def CreateIntervalTime():
     db_manager = DatabaseManager(db)
     db_manager.add_interval(begintime='9:30',endtime='11:05')
 
+def CreateSubject():
+    db_manager = DatabaseManager(db)
+    db_manager.add_subject(name="СТ")
+    db_manager.add_subject(name="ОРБД")
+
+
+def CreateGroup():
+    db_manager = DatabaseManager(db)
+    db_manager.add_group(name="БФИ1801")
+
 with app.app_context():
     db.create_all()
     CreateLecturer()
     CreateIntervalTime()
+    CreateSubject()
+    CreateGroup()
 
 
 
