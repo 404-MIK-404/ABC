@@ -21,6 +21,8 @@ app.register_blueprint(addLecturers)
 app.register_blueprint(schedules)
 
 
+
+
 if __name__ == '__main__':
     app.run()
 
