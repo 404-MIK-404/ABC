@@ -8,21 +8,34 @@ from Models.Schedule import Schedule
 from flask import request, render_template
 from extensions import db
 
+db_manager = DatabaseManager(db)
 schedules = Blueprint('schedules', __name__, template_folder='templates', static_folder='static')
 
-@schedules.route('/lecturers/AddNote', methods=['GET', 'POST'])
+
+@schedules.route('/lecturers/Schedule', methods=['GET', 'POST'])
 def index():
     if request.method == 'POST':
-        db_manager = DatabaseManager(db)
-        db_manager.add_timetable(day=request.form.get('day'),
-                                 interval_id=request.form.get('interval'),
-                                 subject_id=request.form.get('subject'),
-                                 lecturer_id=request.form.get('lecturer'),
-                                 group_id=request.form.get('group'))
+        intervals = request.form.get('interval')
+        subjects = request.form.get('subject')
+        lecturers = request.form.get('lecturer')
+        groups = request.form.get('group')
+        if lecturers and intervals and groups and subjects:
+            lecturer_id = Lecturer.query.filter_by(name_lecturer=request.form.get('lecturer')).first()
+            interval_id = Interval.query.filter_by(begintime=request.form.get('interval')).first()
+            subject_id = Subject.query.filter_by(name=request.form.get('subject')).first()
+            group_id = Group.query.filter_by(name=groups).first()
+            db_manager.add_schedule(day=request.form.get('day'),
+                                    chet_notchet=request.form.get('week'),
+                                    interval_id=interval_id.id,
+                                    subject_id=subject_id.id,
+                                    lecturer_id=lecturer_id.id,
+                                    group_id=group_id.id)
+
+
     return render_template('AddNote.html',
                            lecturers=Lecturer.query.all(),
                            intervals=Interval.query.all(),
                            subjects=Subject.query.all(),
                            groups=Group.query.all(),
-                           schedule=Schedule.query.all()
+                           schedules=Schedule.query.all()
                            )

@@ -9,22 +9,19 @@ class DatabaseManager:
         self.db = db
 
     def add_lecturer(self, **kwargs):
-        lecturer = Lecturer(first_name=kwargs["first_name"],
-                            last_name=kwargs["last_name"],
-                            patronymic=kwargs["patronymic"]
+        lecturer = Lecturer(name_lecturer=kwargs["name_lecturer"],
                             )
         self.db.session.add(lecturer)
         self.db.session.commit()
 
     def add_interval(self,**kwargs):
-        interval = Interval(begintime=kwargs["begintime"],
-                            endtime=kwargs["endtime"]
-                            )
+        interval = Interval(begintime=kwargs["begintime"])
         self.db.session.add(interval)
         self.db.session.commit()
 
-    def add_timetable(self, **kwargs):
+    def add_schedule(self, **kwargs):
         timetable = Schedule(day=kwargs["day"],
+                             chet_notchet=kwargs["chet_notchet"],
                              interval_id=kwargs["interval_id"],
                              subject_id=kwargs["subject_id"],
                              lecturer_id=kwargs["lecturer_id"],

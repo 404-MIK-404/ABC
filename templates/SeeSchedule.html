@@ -2,10 +2,9 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <link rel="stylesheet" type="text/css" href="/static/css/bootstrap.min.css">
-    <title>Просто заголовок для страницы</title>
-
-    <style>
+        <link rel="stylesheet" type="text/css" href="/static/css/bootstrap.min.css">
+    <title>Title</title>
+        <style>
 
 
 .bblock {
@@ -49,32 +48,10 @@
 
 
     </style>
+
 </head>
 <body>
 {% include "Nav.html" %}
-
-	<form action="/lecturers/see" method= "POST">
-
-        <div class="Week"> <label for="week"> Неделя </label> </div>
-        <div class="Week"> <p><input list="Week" name="week"></p> </div>
-        <datalist id="Week">
-            <option>Верхняя</option>
-            <option>Нижняя</option>
-        </datalist>
-
-        <div class="GroupText"> <label for="group"> Группа </label></div>
-        <div class="AddGroup"> <p><input list="Group" name="group"></p> </div>
-        <datalist id="Group">
-            {% for group in groups %}
-            <option>{{ group.name }}</option>
-            {% endfor %}
-        </datalist>
-
-          <div class = "ButtonClick"> <button type="submit">Посмотреть расписание</button>
-  </div>
-
-    </form>
-
 
 <div class="container">
 
@@ -94,9 +71,9 @@
     <tbody>
     {% for schedule in schedules %}
     <tr class="table-light">
+        {%if week == schedule.chet_notchet%}
         <td>{{ schedule.day }}</td>
         <td>{{ schedule.chet_notchet }}</td>
-
         {% for interval in intervals if interval.id == schedule.interval_id %}
         <td>{{ interval.begintime }}</td>
         {% endfor %}
@@ -113,20 +90,17 @@
         {% for group in groups if group.id == schedule.group_id %}
         <td>{{ group.name }}</td>
         {% endfor %}
+        {% endif %}
+        {% endfor %}
 
-    {% endfor %}
     </tr>
     </tbody>
 
 </table>
     </div>
 
-
-
-
-
-
-
 </div>
+
+
 </body>
 </html>

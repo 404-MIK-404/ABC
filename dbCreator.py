@@ -3,34 +3,18 @@ from extensions import db
 from app import app
 
 
-def CreateLecturer():
-    db_manager = DatabaseManager(db)
-    db_manager.add_lecturer(first_name='Гудкова', last_name='Ирина', patronymic='Алексеевна')
-    db_manager.add_lecturer(first_name='Волков', last_name='Андрей', patronymic='Иванович')
-    db_manager.add_lecturer(first_name='Гуриков', last_name='Сергей', patronymic='Ростиславович')
-    db_manager.add_lecturer(first_name='Воробейчиков', last_name='Леонид', patronymic='Александрович')
-    db_manager.add_lecturer(first_name='Мальцева', last_name='Светлана', patronymic='Николаевна')
-
 def CreateIntervalTime():
     db_manager = DatabaseManager(db)
-    db_manager.add_interval(begintime='9:30',endtime='11:05')
+    db_manager.add_interval(begintime='9:30 - 11:05')
+    db_manager.add_interval(begintime='11:20 - 12:55')
+    db_manager.add_interval(begintime='13:10 - 14:45')
+    db_manager.add_interval(begintime='15:25 - 17:00')
+    db_manager.add_interval(begintime='17:15 - 18:50')
 
-def CreateSubject():
-    db_manager = DatabaseManager(db)
-    db_manager.add_subject(name="СТ")
-    db_manager.add_subject(name="ОРБД")
-
-
-def CreateGroup():
-    db_manager = DatabaseManager(db)
-    db_manager.add_group(name="БФИ1801")
 
 with app.app_context():
     db.create_all()
-    CreateLecturer()
     CreateIntervalTime()
-    CreateSubject()
-    CreateGroup()
 
 
 

@@ -14,9 +14,7 @@
 <body>
 {% include "Nav.html" %}
 
-	<form action="/lecturers/AddNote" method= "POST">
-
-
+	<form action="/lecturers/Schedule" method= "POST">
 
     <div class="AddNote" align="left">
         <div class="DayText"> <label for="day"> День проведения пары </label> </div>
@@ -30,15 +28,28 @@
                         <option>Суббота</option>
                         <option>Воскресение</option>
                    </datalist>
+
+
+        <div class="AddNote" align="left">
+        <div class="WeekText"> <label for="week"> Неделя </label> </div>
+        <div class="AddWeek"> <p><input list="Week" name="week"></p> </div>
+                    <datalist id="Week">
+                        <option>Верхняя</option>
+                        <option>Нижняя</option>
+                    </datalist>
+
+
         <div class="IntervalText"> <label for="interval"> Интервал проведения занятия </label> </div>
         <div class="AddInterval"> <p><input list="Interval" name="interval"></p> </div>
         <datalist id="Interval">
-            <option>9:30-11:05</option>
-            <option>11:20-12:55</option>
-            <option>13:10-14:45</option>
-            <option>15:25-17:00</option>
-            <option>17:15-18:50</option>
+            <option>9:30 - 11:05</option>
+            <option>11:20 - 12:55</option>
+            <option>13:10 - 14:45</option>
+            <option>15:25 - 17:00</option>
+            <option>17:15 - 18:50</option>
         </datalist>
+
+
         <div class="SubjectText"> <label for="subject"> Предметы </label></div>
         <div class="AddSubject"> <p><input list="Subject" name="subject"></p> </div>
         <datalist id="Subject">
@@ -46,13 +57,17 @@
             <option>{{ subject.name }}</option>
             {% endfor %}
         </datalist>
+
+
         <div class="LecturerText"> <label for="lecturer"> Преподаватель </label></div>
         <div class="AddLecturer"> <p><input list="Lecturer" name="lecturer"></p> </div>
                 <datalist id="Lecturer">
             {% for lecturer in lecturers %}
-            <option>{{ lecturer.first_name }}</option>
+            <option>{{ lecturer.name_lecturer }}</option>
             {% endfor %}
         </datalist>
+
+
         <div class="GroupText"> <label for="group"> Группа </label></div>
         <div class="AddGroup"> <p><input list="Group" name="group"></p> </div>
         <datalist id="Group">
@@ -63,12 +78,15 @@
 
           <div class = "ButtonClick"> <button type="submit">Добавить запись</button>
   </div>
+
+
         <div class="table">
         <h2>Расписание</h2>
         <table class="table table-hover">
     <thead>
     <tr>
         <th scope="col">День</th>
+        <th scope="col">Неделя</th>
         <th scope="col">Интервал</th>
         <th scope="col">Название предмета</th>
         <th scope="col">Преподаватель</th>
@@ -78,12 +96,16 @@
     <tbody>
     {% for schedule in schedules %}
     <tr class="table-light">
-        <td>{{ schedule.last_name }}</td>
-        <td>{{ schedule.first_name }}</td>
-        <td>{{ schedule.patronymic }}</td>
+        <td>{{ schedule.day }}</td>
+        <td>{{ schedule.chet_notchet }}</td>
+        <td>{{ schedule.interval_id }}</td>
+        <td>{{ schedule.subject_id }}</td>
+        <td>{{ schedule.lecturer_id}}</td>
+        <td>{{ schedule.group_id}}</td>
     {% endfor %}
     </tr>
     </tbody>
+
 </table>
     </div>
 
@@ -91,17 +113,5 @@
 </div>
 
 </form>
-
-
-
-
-
-
-
-
-
-
-
-
 </body>
 </html>

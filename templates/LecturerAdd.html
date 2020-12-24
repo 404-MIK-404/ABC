@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" type="text/css" href="/static/css/bootstrap.min.css">
+    <title>Добавление преподавателей</title>
+    <style>
+
+
+.bblock {
+	display: table-cell;
+  	width: 400px;
+        height: 40px;
+        text-align: center;
+        vertical-align: middle;
+}
+
+.TextLabel {
+  position:absolute;
+  left:20%;
+  right:20%;
+  display: table;
+  display: inline-block;
+}
+
+.TextInput {
+	display: table-cell;
+  	width: 400px;
+        height: 40px;
+        text-align: center;
+        vertical-align: middle;
+}
+
+.EnterInput {
+    position:absolute;
+	left:20%;
+    right:20%;
+  display: table;
+  display: inline-block;
+}
+
+.ButtonClick{
+ position: relative;
+ left: 5%;
+ height: 70px;
+ width: 400px;
+}
+
+
+    </style>
+</head>
+<body>
+{% include "Nav.html" %}
+
+
+<form action = "/lecturers/AddLecturers" method="POST">
+
+
+
+    <div class="TextLabel" align="center">
+  <div class="bblock"> <label for="name_lecturer"> ФИО препода </label> </div>
+<br>
+
+    <div class="EnterInput" align="center">
+        <div class="TextInput"> <input type="text" name = "name_lecturer"> </div>
+    <br>
+
+
+  <div class = "ButtonClick"> <button type="submit">Добавить запись</button>
+  </div>
+
+
+</form>
+
+<div class="container">
+
+
+
+    <!-- Создание таблицы для преподователей -->
+    <div class="table">
+        <h2>Преподаватели</h2>
+        <table class="table table-hover">
+    <thead>
+    <tr>
+        <th scope="col">ФИО</th>
+    </tr>
+    </thead>
+    <tbody>
+    {% for lecturer in lecturers %}
+    <tr class="table-light">
+        <td>{{ lecturer.name_lecturer }}</td>
+    {% endfor %}
+    </tr>
+    </tbody>
+</table>
+    </div>
+
+</div>
+
+
+</body>
+</html>

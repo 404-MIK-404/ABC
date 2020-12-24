@@ -8,12 +8,10 @@ from extensions import db
 addLecturers = Blueprint('addLecturers', __name__, template_folder='templates', static_folder='static')
 
 
-@addLecturers.route("/lecturers", methods=['GET', 'POST'])
+@addLecturers.route("/lecturers/AddLecturers", methods=['GET', 'POST'])
 def AddLecturers():
     if request.method == 'POST':
         db_manager = DatabaseManager(db)
-        db_manager.add_lecturer(first_name=request.form.get('first_name'), last_name=request.form.get('last_name'),
-                                patronymic=request.form.get('patronymic'))
-    return render_template('Index.html',
-                           lecturers=Lecturer.query.all(),
-                           intervals=Interval.query.all())
+        db_manager.add_lecturer(name_lecturer=request.form.get('name_lecturer'))
+    return render_template('LecturerAdd.html',
+                           lecturers=Lecturer.query.all())

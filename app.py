@@ -10,6 +10,8 @@ from Models.Subject import Subject
 from Routes.AddLecturers import addLecturers
 from Routes.Lecturers import lecturers
 from Routes.AddNote import schedules
+from Routes.AddSubject import add_subject
+from Routes.AddGroup import add_groups
 
 app = Flask(__name__)
 app.config['DEBUG'] = True
@@ -19,6 +21,8 @@ db = SQLAlchemy(app)
 app.register_blueprint(lecturers)
 app.register_blueprint(addLecturers)
 app.register_blueprint(schedules)
+app.register_blueprint(add_subject)
+app.register_blueprint(add_groups)
 
 
 
